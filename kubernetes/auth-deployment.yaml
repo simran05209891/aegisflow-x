@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aegisflow-auth
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aegisflow-auth
+  template:
+    metadata:
+      labels:
+        app: aegisflow-auth
+    spec:
+      containers:
+      - name: auth
+        image: aegisflow-auth:stable
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SECRET_KEY
+          value: "aegisflow-prod-secret"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10

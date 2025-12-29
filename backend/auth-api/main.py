@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
@@ -6,7 +7,7 @@ app = FastAPI()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-SECRET_KEY = "aegisflow-secret"
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
 ALGORITHM = "HS256"
 
 @app.post("/login")
@@ -21,3 +22,7 @@ def secure(token: str = Depends(oauth2_scheme)):
         return {"status": "Authorized", "user": payload["user"]}
     except:
         raise HTTPException(status_code=401, detail="Unauthorized")
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}

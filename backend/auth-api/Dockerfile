@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir fastapi uvicorn python-jose
+RUN pip install --no-cache-dir fastapi uvicorn python-jose python-multipart slowapi
 
 EXPOSE 8000
 
