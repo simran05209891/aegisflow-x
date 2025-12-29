@@ -16,3 +16,11 @@ AegisFlow X is an end-to-end DevOps architecture platform designed with a strong
 - Auto Scaling
 - Cost Optimization
 - Production Readiness
+
+## CI/CD Strategy
+This project uses GitHub Actions for continuous integration.
+The pipeline automatically builds the Docker image on every push.
+
+Kubernetes deployment is performed manually on a local Minikube cluster.
+In production environments, the same pipeline can deploy to managed
+Kubernetes services such as EKS, AKS, or GKE.
