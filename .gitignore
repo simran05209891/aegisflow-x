@@ -1,0 +1,20 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Env
+.env
+
+# Editor
+.vscode/
+
+# OS
+.DS_Store
+
+# Docker / K8s local
+.docker/
+.kube/
+
+# Node (future use)
+node_modules/
