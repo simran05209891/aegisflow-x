@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,18 +14,3 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t aegisflow-auth:latest backend/auth-api
-
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v4
-      with:
-        version: 'latest'
-
-    - name: Configure kubeconfig
-      run: |
-        mkdir -p ~/.kube
-        echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl set image deployment/aegisflow-auth auth=aegisflow-auth:latest
-        kubectl rollout status deployment/aegisflow-auth
